@@ -1,0 +1,86 @@
+<div id="left">
+  <div class="controlblock">
+    <h3>Stream Local Video Sources</h3>
+    <a href="/channels/1" class="squarebutton <%= 'on' if @channel.id == 1 %>"><span>Endo Cam</span></a>
+    <a href="/channels/2" class="squarebutton <%= 'on' if @channel.id == 2 %>"><span>Room Cam</span></a>
+    <a href="" class="squarebutton disabled"><span>Flouro Scope</span></a>
+    <a href="" class="squarebutton disabled"><span>Navigation</span></a>
+    <div class="clear"></div>
+  </div>
+  <div class="controlblock">
+    <h3>Multiview Enable</h3>
+    <a href="" class="squarebutton checkbox disabled"><span>Endo Cam</span></a>
+    <a href="" class="squarebutton checkbox disabled"><span>Room Cam</span></a>
+    <a href="" class="squarebutton checkbox disabled"><span>Quad HD</span></a>
+    <a href="" class="squarebutton checkbox disabled"><span>3D Images</span></a>
+    <div class="clear"></div>
+  </div>
+  <div class="controlblock plain">
+    <div class="checkfield"><input type="checkbox" name="ptzonoff" id="ptzonoff" checked="checked"/><label for="ptzonoff">Allow Remote PTZ</label></div>
+    <div class="checkfield"><input type="checkbox" name="privacyonoff" id="privacyonoff" /><label for="privacyonoff">Privacy Mode</label></div>
+    <div class="clear"></div>
+  </div>
+  <div class="controlblock">
+    <h3>Camera Controls</h3>
+    <div id="ptz">
+      <img src="/images/pan.png" />
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<div id="videocol">
+  <div id="preview_window">
+    <h2 id="preview_name"><span>OR-11: Room Cam</span></h2>
+    <div id="preview_video"></div>
+  </div>
+  <div id="preview_controls">
+    <ul>
+      <li id="record"><%= link_to(new_recording_path(:channel_id => @channel.id + 2), :class => "button withimage" ) do %><span>Record</span><% end %></li>
+      <li id="snapshot" class="disabled"><a href="" class="button withimage"><span>Take Snapshot</span></a></li>
+      <li id="savesnapshot" class="disabled"><a href="" class="button withimage"><span>Save Snapshot</span></a></li>
+    </ul>
+  </div>
+  <div id="cam_status">
+    <ul>
+      <li class="cam">Local Recorder 1 Status - Active</li>
+      <li class="cam">Local Recorder 2 Status - Inactive</li>
+    </ul>
+  </div>
+</div>
+
+<div id="right">
+  <div class="controlblock">
+    <h3>Remote Destinations</h3>
+    <a href="" class="squarebutton remote"><span>Recorder</span></a>
+    <a href="" class="squarebutton remote" id="or10"><span>Preview Room</span></a>
+    <div class="clear"></div>
+  </div>
+  <div class="controlblock">
+    <h3>Remote Sources</h3>
+    <a href="" class="squarebutton remote"><span>Pathology</span></a>
+    <a href="" class="squarebutton remote" id="or11"><span>OR-11</span></a>
+    <a href="" class="squarebutton remote"><span>Skills Lab</span></a>
+    <a href="" class="squarebutton remote"><span>Auditorium</span></a>
+    <div class="clear"></div>
+  </div>
+  <div class="controlblock">
+    <h3>Remote Cameras</h3>
+    <a href="" class="squarebutton"><span>Endo Cam</span></a>
+    <a href="" class="squarebutton" id="or10"><span>Room Cam</span></a>
+    <a href="" class="squarebutton"><span>Quad HD</span></a>
+    <a href="" class="squarebutton"><span>3D Images</span></a>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<% if @channel %>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      var x = $('#preview_video').offset().left - 1;
+      var y = $('#preview_video').offset().top - 16;
+      $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vftv" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s <%= @channel.callsign %> -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
+    });
+  </script>
+
+<% end %>

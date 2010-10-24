@@ -1,0 +1,12 @@
+<div id="videocol" class="loginscreen">
+  <div class="pagehead">
+    OR-10 <br/>
+    <span class="subtitle">Network Video Control Log In</span>
+
+  </div>
+  <%= form_tag '/dashboard' do %>
+    <div class="field"><label for="username">Username</label><input type="text" name="username" id="username" /></div>
+    <div class="field"><label for="password">Password</label><input type="password" name="password" id="password" /></div>
+    <div id="loginscreen_buttons"><button type="submit"><span>Login</span></button> <a href="reset.html">Reset Password</a>
+  <% end %>
+</div>

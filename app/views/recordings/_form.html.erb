@@ -1,0 +1,64 @@
+        <div id="left">
+          <div class="controlblock">
+            <h3>Clip Details</h3>
+            <form>
+              <div class="field">
+                <label for="title">Title</label>
+                <input type="text" name="title" />
+              </div>
+              <div class="field">
+                <label for="description">Description</label>
+                <input type="text" name="description" />
+              </div>
+              <button type="submit"><span>Save Clip</span></button>
+            </form>
+            
+            <div class="clear"></div>
+          </div>
+          <div class="controlblock">
+            <h3>Hot Marks</h3>
+            <div id="customhot">
+              <form>
+                <div class="field">
+                  <label for="customhot">Custom Meta Data</label>
+                  <input type="text" name="customhot" />
+                </div>
+                <button type="submit"><span>Add</span></button>
+                <div id="bookmark"><a href="" class="button withimage"><span>Bookmark</span></a></div>
+              </form>
+              
+            </div>
+            <a href="" class="squarebutton"><span>Open</span></a>
+            <a href="" class="squarebutton"><span>Close</span></a>
+            <a href="" class="squarebutton"><span>Proc 1</span></a>
+            <a href="" class="squarebutton"><span>Proc 2</span></a>
+            <a href="" class="squarebutton"><span>Proc A</span></a>
+            <a href="" class="squarebutton"><span>Proc B</span></a>
+            <div class="clear"></div>
+          </div>
+          <div class="controlblock">
+            <h3>Camera Controls</h3>
+            <div id="ptz">
+              <img src="/images/pan.png" />
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        
+        <div id="videocol">
+          <div id="preview_window">
+            <h2 id="preview_name"><span>Preview Name</span></h2>
+            <div id="preview_video">
+            </div>
+          </div>
+          <div id="preview_controls">
+            <% if params[:action] == 'new' %>
+              <ul>
+                <li id="record"><a href="" class="button withimage"><span>Record</span></a></li>
+                <li id="stop" style="display:none"><a href="" class="button withimage"><span>Stop</span></a></li>
+                <li id="snapshot" class="disabled"><a href="" class="button withimage"><span>Take Snapshot</span></a></li>
+                <li id="savesnapshot" class="disabled"><a href="" class="button withimage"><span>Save Snapshot</span></a></li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
