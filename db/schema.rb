@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(:version => 20101024145124) do
   create_table "channels", :force => true do |t|
     t.integer  "number"
     t.string   "title"
+    t.string   "callsign"
+    t.string   "source_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
