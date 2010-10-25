@@ -7,6 +7,8 @@ gem 'rails', '3.0.1'
 
 gem 'pg'
 gem 'haivision'
+gem "message_block"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :check_active_recording
   protect_from_forgery
   
   protected
@@ -15,6 +16,15 @@ class ApplicationController < ActionController::Base
       else
         ip = request.ip == '127.0.0.1' ? '10.1.50.103' : request.ip
         Haivision::Cli.close_instream_by_ip(ip)
+      end
+    end
+    
+    def check_active_recording
+      if session[:active_recording]
+        recording = Haivision::Recording.find(session[:active_recording])
+        if recording.nil? || !recording.recording?
+          session[:active_recording] = nil 
+        end
       end
     end
 end

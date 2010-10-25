@@ -2,7 +2,12 @@ Medical::Application.routes.draw do
   match "dashboard" => 'dashboard#index'
   root :to => "dashboard#login"
   resources :channels
-  resources :recordings
+  resources :recordings do
+    member do
+      post :stop
+      post :publish
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

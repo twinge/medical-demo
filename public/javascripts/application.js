@@ -20,7 +20,17 @@ $(function() {
 			}
 		}
 	});
-	$('.disabled').click(function() {return false})
+	$('.disabled').click(function() {return false});
+	$('body#detail #record').click(function() {
+		$(this).closest('form').submit();
+		return false
+	});
+	$('#or11').click(function() {
+		$('.controlblock.or11').show();
+		$('.on').removeClass('on');
+		$(this).addClass('on');
+		return false
+	});
 });
 
 displayForm = function (elementId)

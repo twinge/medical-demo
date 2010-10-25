@@ -16,6 +16,11 @@ a {
   color: #fff;
 }
 
+#cam_status a {
+  text-decoration: none;
+  color: blue;
+}
+
 h1 {
   margin: 0;
 }
@@ -368,7 +373,7 @@ ul#screenshots li {
   width: auto;
 }
 
-.controlblock form {
+.controlblock .fields {
   padding: 10px;
 }
 

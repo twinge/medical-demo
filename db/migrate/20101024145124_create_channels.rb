@@ -4,6 +4,7 @@ class CreateChannels < ActiveRecord::Migration
       t.integer :number
       t.string :title
       t.string :callsign
+      t.string :source_url
 
       t.timestamps
     end

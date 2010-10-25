@@ -46,6 +46,8 @@ GEM
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
+    message_block (1.0.1)
+      rails (>= 3.0.0)
     mime-types (1.16)
     net-ssh (2.0.23)
     nokogiri (1.4.3.1)
@@ -82,5 +84,6 @@ PLATFORMS
 
 DEPENDENCIES
   haivision
+  message_block
   pg
   rails (= 3.0.1)
