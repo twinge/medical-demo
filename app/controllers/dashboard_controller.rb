@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
       return false
     end
     @channel = Channel.find(params[:channel_id] || :first)
-    close_players(:except => @channel.number)
+    # close_players(:except => @channel.number)
   end
   
   def login

@@ -4,7 +4,7 @@ class RecordingsController < ApplicationController
   before_filter :get_recording, :only => [:edit, :publish, :stop]
   def new
     @recording = Recording.new
-    close_players(:except => @channel.number)
+    # close_players(:except => @channel.number)
   end
   
   def edit
