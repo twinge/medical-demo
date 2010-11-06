@@ -5,10 +5,16 @@ class DashboardController < ApplicationController
       return false
     end
     @channel = Channel.find(params[:channel_id] || :first)
-    # close_players(:except => @channel.number)
+    open_channel(@channel.number)
   end
   
   def login
+  end
+  
+  def multiview
+    @channel = Channel.new
+    close_players
+    render :index
   end
 
 end

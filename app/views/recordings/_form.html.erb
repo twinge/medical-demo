@@ -1,74 +1,81 @@
-<%= form_tag @recording.id ? recording_path(@recording.id) : recordings_path do %>
-  <%= hidden_field_tag :channel_id, @channel.id %>
-  <div id="left">
+<div id="left">
+  <%= form_tag @recording.id ? recording_path(@recording.id) : recordings_path, :id => 'recording_form' do %>
+    <%= hidden_field_tag :channel_id, @channel.id %>
     <div class="controlblock">
       <h3>Clip Details</h3>
       <div class="fields">
         <div class="field">
           <label for="title">Title</label>
-          <%= text_field_tag 'title', @recording.title, :read_only => @recording.recorded? %>
+          <%= text_field_tag 'title', @recording.title, :readonly => @recording.id.present? %>
         </div>
         <div class="field">
           <label for="description">Description</label>
-          <%= text_field_tag 'description', @recording.description, :read_only => @recording.recorded? %>
+          <%= text_field_tag 'description', @recording.description, :readonly => @recording.id.present? %>
         </div>
         <% if @recording.recording? %>
-          <button type="submit"><span>Save Clip</span></button>
+          <!-- <button type="button" id="save_clip"><span>Save Clip</span></button> -->
         <% end %>
       </div>
       <div class="clear"></div>
     </div>
-    
-    <% if @recording.recording? %>
-      <div class="controlblock">
-        <h3>Hot Marks</h3>
-        <div id="customhot">
-          <div class="fields">
+  <% end %>
+  <% if @recording.recording? %>
+    <div class="controlblock">
+      <h3>Hot Marks</h3>
+      <div id="customhot">
+        <div class="fields">
+          <%= form_tag hotmarks_path, :remote => true do %>
+            <%= hidden_field_tag 'type', 'hotmark' %>
+            <%= hidden_field_tag 'link', @recording.links[:self] %>
             <div class="field">
               <label for="customhot">Custom Meta Data</label>
-              <input type="text" name="customhot" />
+              <%= text_field_tag 'hotmark' %>
             </div>
             <button type="submit"><span>Add</span></button>
-            <div id="bookmark"><a href="" class="button withimage"><span>Bookmark</span></a></div>
+          <% end %>
+          <div id="bookmark">
+            <%= link_to(hotmarks_path(:type => 'bookmark', :link => @recording.links[:self]), :remote => true, :method => :post, :class => "button withimage") do %>
+              <span>Bookmark</span>
+            <% end %>  
           </div>
         </div>
-        <a href="" class="squarebutton"><span>Open</span></a>
-        <a href="" class="squarebutton"><span>Close</span></a>
-        <a href="" class="squarebutton"><span>Proc 1</span></a>
-        <a href="" class="squarebutton"><span>Proc 2</span></a>
-        <a href="" class="squarebutton"><span>Proc A</span></a>
-        <a href="" class="squarebutton"><span>Proc B</span></a>
-        <div class="clear"></div>
       </div>
-    <% end %>
-    
-    <div class="controlblock">
-      <h3>Camera Controls</h3>
-      <div id="ptz">
-        <img src="/images/pan.png" />
-      </div>
+      <% ['Open', 'Close', 'Proc 1', 'Proc 2', 'Proc A', 'Proc B'].each do |hotmark| %>
+        <%= link_to(hotmarks_path(:type => 'hotmark', :hotmark => hotmark, :link => @recording.links[:self]), :remote => true, :method => :post, :class => "squarebutton") do %>
+          <span><%= hotmark %></span>
+        <% end %>
+      <% end %>
       <div class="clear"></div>
     </div>
+  <% end %>
+  
+  <div class="controlblock">
+    <h3>Camera Controls</h3>
+    <div id="ptz">
+      <img src="/images/pan.png" />
+    </div>
+    <div class="clear"></div>
   </div>
+</div>
 
-  <div id="videocol">
-    <div id="preview_window">
-      <h2 id="preview_name"><span><%= @channel.title %></span></h2>
-      <div id="preview_video">
-      </div>
-    </div>
-    <div id="preview_controls">
-      <ul>
-        <% if params[:action] == 'new' %>
-          <li id="record"><%= link_to('#', :class => 'button withimage') do %><span>Record</span><% end %></li>
-          <li id="snapshot" class="disabled"><a href="" class="button withimage"><span>Take Snapshot</span></a></li>
-          <li id="savesnapshot" class="disabled"><a href="" class="button withimage"><span>Save Snapshot</span></a></li>
-        <% elsif @recording.recording? %>
-          <li id="stop"><%= link_to(stop_recording_path(@recording.id), :class => 'button withimage', :method => :post) do %><span>Stop</span><% end %></li>
-        <% else %>
-          <li id="publish"><%= link_to(publish_recording_path(@recording.id), :class => 'button', :method => :post) do %><span>Publish</span><% end %></li>
-        <% end %>
-      </ul>
+<div id="videocol">
+  <div id="preview_window">
+    <h2 id="preview_name"><span><%= @channel.title %></span></h2>
+    <div id="preview_video">
+      <%= link_to('Open Video', params.merge({:force => true})) unless @recording.recorded? %>
     </div>
   </div>
-<% end %>
+  <div id="preview_controls">
+    <ul>
+      <% if params[:action] == 'new' %>
+        <li id="record"><%= link_to('#', :class => 'button withimage') do %><span>Record</span><% end %></li>
+        <li id="snapshot" class="disabled"><a href="" class="button withimage"><span>Take Snapshot</span></a></li>
+        <li id="savesnapshot" class="disabled"><a href="" class="button withimage"><span>Save Snapshot</span></a></li>
+      <% elsif @recording.recording? %>
+        <li id="stop"><%= link_to(stop_recording_path(@recording.id), :class => 'button withimage', :method => :post) do %><span>Stop</span><% end %></li>
+      <% else %>
+        <li id="publish"><%= link_to(publish_recording_path(@recording.id), :class => 'button', :method => :post) do %><span>Publish</span><% end %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -40,14 +40,13 @@ GEM
       net-ssh
       nokogiri
       rest-client
-    i18n (0.4.1)
+    i18n (0.4.2)
     json (1.4.6)
-    mail (2.2.7)
+    mail (2.2.9)
       activesupport (>= 2.3.6)
-      mime-types
-      treetop (>= 1.4.5)
-    message_block (1.0.1)
-      rails (>= 3.0.0)
+      i18n (~> 0.4.1)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
     mime-types (1.16)
     net-ssh (2.0.23)
     nokogiri (1.4.3.1)
@@ -74,7 +73,7 @@ GEM
     rake (0.8.7)
     rest-client (1.6.1)
       mime-types (>= 1.16)
-    thor (0.14.3)
+    thor (0.14.4)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
@@ -84,6 +83,5 @@ PLATFORMS
 
 DEPENDENCIES
   haivision
-  message_block
   pg
   rails (= 3.0.1)

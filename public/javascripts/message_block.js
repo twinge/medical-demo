@@ -4,34 +4,15 @@
  * Allows for updating a message block with JSON errors
  **/
 
-var MessageBlock = Class.create({
-  initialize: function(message_block) {
-    this.message_block = $(message_block ? message_block : "message_block");
-  },
-  
-  clear: function() {
-    this.message_block.update("");
-    new Effect.Fade(this.message_block);
-  },
-  
-  update: function(errors) {
-    if (!errors || Object.keys(errors).size() == 0) {
-      new Effect.Fade(this.message_block);
-      return;
-    }
-    
-    this.message_block.update("");
-    
-    for (error_type in errors) {
-      $(this.message_block).appendChild(
-        Builder.node('ul', { 'class': error_type },
-          $A(errors[error_type]).map(function(error) {
-            return Builder.node('li', error);
-          })
-        )
-      );
-    }
-    
-    new Effect.Appear(this.message_block);
-  }
-});
+var setMessage = function(msg, timeout, msg_type) {
+	if(msg_type == null) msg_type = 'notice';
+	if(timeout == null) timeout = 3000;
+	var message_block = $('#message_block');
+	if (message_block[0] == null) {
+		message_block = $('<div id="message_block" class="message_block"></div>');
+		$('body').append(message_block);
+	}
+	message_block.show();
+	message_block.html('<ul class="' + msg_type + '"><li>' + msg + '</li></ul>');
+	window.setTimeout ( function() {$('#message_block').fadeOut();}, timeout )
+}

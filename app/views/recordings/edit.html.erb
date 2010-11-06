@@ -1,6 +1,6 @@
 <%= render 'form' %>
 
-<% if @recording.recording? %>
+<% if @open_player %>
   <script type="text/javascript" charset="utf-8">
     $(function() {
       var x = $('#preview_video').offset().left - 1;

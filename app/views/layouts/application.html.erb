@@ -7,9 +7,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js" type="text/javascript"></script>
   
 		<script type="text/javascript" src="/javascripts/jquery.checkbox.min.js"></script>
-		<%= stylesheet_link_tag "message_block" %>
     <%= stylesheet_link_tag :all %>
-    <%= javascript_include_tag 'rails', 'application' %>
+    <%= javascript_include_tag 'rails', 'message_block', 'application' %>
     <%= csrf_meta_tag %>
   
   </head>
@@ -47,9 +46,9 @@
       <div class="wrap">
         <!-- <ul id="screenshots">
           <li id="save"></li>
-          <li><a href=""><img src="images/preview.jpg" /></a></li>
-          <li><a href=""><img src="images/preview.jpg" /></a></li>
-          <li><a href=""><img src="images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
         </ul> -->
       </div>
     </div>

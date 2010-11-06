@@ -1,14 +1,15 @@
 class RecordingsController < ApplicationController
   include Haivision
   before_filter :get_channel, :except => [:edit, :publish, :stop]
-  before_filter :get_recording, :only => [:edit, :publish, :stop]
+  before_filter :get_recording, :only => [:edit, :publish, :stop, :update]
   def new
     @recording = Recording.new
-    # close_players(:except => @channel.number)
+    open_channel(@channel.number)
   end
   
   def edit
     @channel = Channel.find_by_source_url(@recording.source_url)
+    open_channel(@channel.number)
   end
   
   def create
@@ -29,7 +30,7 @@ class RecordingsController < ApplicationController
   def stop
     @recording.stop!
     flash[:confirm] = "Recording has been stopped"
-    close_players
+    # close_players
     redirect_to edit_recording_path(@recording.id)
   end
   
@@ -40,7 +41,7 @@ class RecordingsController < ApplicationController
   end
   
   def update
-    
+    @recording.update!(:title => params[:title], :description => params[:description])
   end
   
   protected

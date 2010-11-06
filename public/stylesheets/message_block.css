@@ -1,7 +1,9 @@
 .message_block {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
   clear: both;
-  margin-top: 0.2em;
-  margin-bottom: 0.3em;
 }
 
 .message_block ul {

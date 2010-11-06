@@ -1,7 +1,7 @@
 class ChannelsController < ApplicationController
   def show
     @channel = Channel.find(params[:id])
-    close_players(:except => @channel.number)
+    open_channel(@channel.number)
     render 'dashboard/index'
   end
 end

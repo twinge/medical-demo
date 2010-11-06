@@ -1,5 +1,8 @@
 Medical::Application.routes.draw do
+  resources :hotmarks
+  
   match "dashboard" => 'dashboard#index'
+  match "multiview" => 'dashboard#multiview'
   root :to => "dashboard#login"
   resources :channels
   resources :recordings do
