@@ -24,7 +24,8 @@ namespace :deploy do
   after "deploy:update_code", "deploy:medical"
   task :medical, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
     run <<-CMD
-      ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml 
+      ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml &&
+      chown -R apache.apache #{release_path}
     CMD
   end
 end
