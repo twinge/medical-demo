@@ -1,4 +1,6 @@
 Medical::Application.routes.draw do
+  resources :decoders
+
   resources :hotmarks
   
   match "dashboard" => 'dashboard#index'

@@ -13,7 +13,8 @@ class DashboardController < ApplicationController
   
   def multiview
     @channel = Channel.new
-    close_players
+    @channels = Channel.find_all_by_number([params[:m_endo], params[:m_room]])
+    # close_players
     render :index
   end
 

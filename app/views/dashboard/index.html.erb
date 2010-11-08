@@ -1,3 +1,10 @@
+<script type="text/javascript" charset="utf-8">
+	var x, y
+  $(function() {
+    x = $('#preview_video').offset().left + 45;
+    y = $('#preview_video').offset().top - 4;
+	});
+</script>
 <div id="left">
   <div class="controlblock">
     <h3>Local Video Sources</h3>
@@ -10,8 +17,8 @@
   <div class="controlblock">
     <h3>Multiview Enable</h3>
     <%= form_tag('/multiview', :method => :get) do %>
-      <div class="checkfield"><%= check_box_tag :m_endo, '1', params[:m_endo] %><label for="m_endo">Endo Cam</label></div>
-      <div class="checkfield"><%= check_box_tag :m_room, '1', params[:m_room] %><label for="m_room">Room Cam</label></div>
+      <div class="checkfield"><%= check_box_tag :m_endo, '100', params[:m_endo] %><label for="m_endo">Endo Cam</label></div>
+      <div class="checkfield"><%= check_box_tag :m_room, '101', params[:m_room] %><label for="m_room">Room Cam</label></div>
       <div class="checkfield disabled"><input type="checkbox" name="m_quad" id="m_quad" disabled="disabled"><label for="m_quad">Quad HD</label></div>
       <div class="checkfield disabled"><input type="checkbox" name="m_3d" id="m_3d" disabled="disabled"><label for="m_3d">3D Images</label></div>
       
@@ -66,8 +73,10 @@
 <div id="right">
   <div class="controlblock">
     <h3>Remote Destinations</h3>
-    <a href="" class="squarebutton remote disabled"><span>Recorder</span></a>
-    <a href="" class="squarebutton remote disabled"><span>Preview Room</span></a>
+    <a href="" class="squarebutton remote disabled" style="height:78px"><span>Recorder</span></a>
+		<%= link_to(decoder_path(Decoder.first.id, :channel_id => @channel.id), :class => "squarebutton remote", :remote => true) do %>
+    	<span>Preview Room</span>
+		<% end %>
     <div class="clear"></div>
   </div>
   <div class="controlblock">
@@ -88,20 +97,23 @@
   </div>
 </div>
 
-<% if @open_player %>
-  <script type="text/javascript" charset="utf-8">
-    $(function() {
-      var x = $('#preview_video').offset().left -1  ;
-      var y = $('#preview_video').offset().top - 16;
-      $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vftv" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s <%= @channel.callsign %> -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
-    });
-  </script>
-<% elsif params[:m_room] == '1' || params[:m_endo] == '1' %>
-  <script type="text/javascript" charset="utf-8">
-    $(function() {
-      var x = $('#preview_video').offset().left -1  ;
-      var y = $('#preview_video').offset().top - 16;
-      $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vfmon" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s <%= @channel.callsign %> -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
-    });
-  </script>
+<% unless session[:ipad] %>
+	<% if @open_player %>
+	  <script type="text/javascript" charset="utf-8">
+	    $(function() {
+	      $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vftv" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s <%= @channel.callsign %> -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
+	    });
+	  </script>
+	<% elsif @channels %>
+	  <script type="text/javascript" charset="utf-8">
+	    $(function() {
+				var channels = '';
+				<% @channels.each do |channel| %>
+					channels += ' <%= channel.callsign %>';
+				<% break; end %>
+				console.log('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vfmonitor" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s ' + channels + ' -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
+	      $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vfmonitor" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s ' + channels + ' -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
+	    });
+	  </script>
+	<% end %>
 <% end %>
