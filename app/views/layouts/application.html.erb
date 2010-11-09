@@ -3,8 +3,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Lighspeed [SS]: OR Video Portal</title>
     <%= stylesheet_link_tag :all %>
-    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery.checkbox.min', 'rails', 'message_block', 'application' %>
+    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery.checkbox.min', 'rails', 'message_block', 'application', 'jquery.jcarousel' %>
     <%= csrf_meta_tag %>
+    <script type="text/javascript">
+      //<![CDATA[
+      function showSlidingDiv(){
+        $("#shots").animate({"height": "toggle"}, { duration: 250 });
+      }
+      //]]>
+    </script>
+    <script type="text/javascript">
+      $(function() {
+          jQuery('#screenshots').jcarousel({
+          	scroll: '11',
+          	size: '11',
+          	visible: '11'
+          });
+        $('#footertab').click(function() {
+          $(this).toggleClass("close");
+        });   
+      });
+
+    </script>
+
+
   </head>
   
   <body id="<%= params[:controller] == 'recordings' ? 'detail' : '' %>">
@@ -38,12 +60,34 @@
     </div>
     <div id="footer">
       <div class="wrap">
-        <!-- <ul id="screenshots">
-          <li id="save"></li>
+        <div id="footertab">
+          <a href="" id="showithideit" onclick="showSlidingDiv(); return false;" class="">Show Snapshots</a>
+        </div>
+      </div>
+      <div class="wrap" id="shots">
+        <ul id="screenshots" class="jcarousel-skin-tango">
           <li><a href=""><img src="/images/preview.jpg" /></a></li>
           <li><a href=""><img src="/images/preview.jpg" /></a></li>
           <li><a href=""><img src="/images/preview.jpg" /></a></li>
-        </ul> -->
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+          <li><a href=""><img src="/images/preview.jpg" /></a></li>
+        </ul>
       </div>
     </div>
   </body>
