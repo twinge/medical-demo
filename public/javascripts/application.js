@@ -44,7 +44,7 @@ $(function() {
 	}, function() {
 		$('.delete', this).hide();
 	});
-	
+	$("#shots").animate({"height": "toggle"}, { duration: 0 });
 });
 
 var bindAjaxAfter = function() {

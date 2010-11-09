@@ -8,7 +8,7 @@ class Snapshot < ActiveRecord::Base
   end
   
   def self.base_path
-    Rails.root.join('snapshots').to_s
+    Rails.root.join('public','snapshots').to_s
   end
 end
 
