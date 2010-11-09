@@ -6,30 +6,6 @@
     <%= stylesheet_link_tag 'ipad' if session[:ipad] %>
     <%= javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery.checkbox.min', 'rails', 'message_block', 'jquery.easing.1.3',  'jquery.bxSlider.min', 'application' %>
     <%= csrf_meta_tag %>
-    <script type="text/javascript">
-      //<![CDATA[
-      function showSlidingDiv(){
-        $("#shots").animate({"height": "toggle"}, { duration: 250 });
-      }
-      //]]>
-    </script>
-    <script type="text/javascript">
-      $(function() {
-        $('#footertab').click(function() {
-          $(this).toggleClass("close");
-        });   
-      });
-
-    </script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $('#screenshots').bxSlider({
-          displaySlideQty: 8
-        });
-      });
-    </script>
-
-
   </head>
   
   <body id="<%= params[:controller] == 'recordings' ? 'detail' : '' %>">

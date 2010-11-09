@@ -32,11 +32,9 @@ $(function() {
 		$(this).addClass('on');
 		return false
 	});
-   // $('#screenshots').jcarousel({
-   // 	 scroll: '11',
-   // 	 size: '11'
-   // 	 // visible: '11'
-   // });
+  $('#screenshots').bxSlider({
+    displaySlideQty: 8
+  });
    $('#footertab').click(function() {
      $(this).toggleClass("close");
    }); 
