@@ -526,3 +526,7 @@ span.subtitle {
   text-align: center;
   margin: 8px;
 }
+
+li.snapshot {
+	cursor: pointer;;
+}

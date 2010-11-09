@@ -1,0 +1,30 @@
+.wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+ 
+/* *********************************************************** */
+/* VIDEOCOL */
+/* *********************************************************** */
+
+#videocol {
+  width: 700px;
+  position: absolute;
+  margin-left: 250px;
+  padding-top: 30px;
+} 
+
+#preview_window {
+  border: 1px solid #999;
+  -moz-box-shadow: 0px 0px 10px #000;
+  -webkit-box-shadow: 0px 0px 10px #000;
+  box-shadow: 0px 0px 10px #000;
+  width: 700px ;
+  height: auto;
+  background: #fff;
+}
+
+#preview_video {
+  height: 400px;
+  background: #000;
+}

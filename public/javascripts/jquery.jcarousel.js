@@ -166,6 +166,7 @@
                 self.format(this, j++);
                 wh += self.dimension(this, di);
             });
+						wh = 1097;
 
             this.list.css(this.wh, (wh + 100) + 'px');
 

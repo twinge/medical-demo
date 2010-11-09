@@ -32,10 +32,34 @@ $(function() {
 		$(this).addClass('on');
 		return false
 	});
+   // $('#screenshots').jcarousel({
+   // 	 scroll: '11',
+   // 	 size: '11'
+   // 	 // visible: '11'
+   // });
+   $('#footertab').click(function() {
+     $(this).toggleClass("close");
+   }); 
+	
+	$('.snapshot').live('hover', function() {
+		$('.delete', this).show();
+	}, function() {
+		$('.delete', this).hide();
+	});
+	
 });
 
-displayForm = function (elementId)
-{
+var bindAjaxAfter = function() {
+	$('#snapshot .delete').bind('ajax:before', function() {
+		$(this).closet('li').fadeOut();
+	})
+}
+
+var showSlidingDiv = function() {
+  $("#shots").animate({"height": "toggle"}, { duration: 250 });
+}
+
+var displayForm = function (elementId) {
 	var content = [];
 	$('#' + elementId + ' input').each(function(){
 		var el = $(this);

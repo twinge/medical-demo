@@ -1,4 +1,6 @@
 Medical::Application.routes.draw do
+  resources :snapshots
+
   resources :decoders
 
   resources :hotmarks
