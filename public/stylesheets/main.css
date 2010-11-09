@@ -372,32 +372,24 @@ padding:6px 8px;
 }
 
 #shots {
-  height: 90px;
-  display: none;
+  height: auto;
+  display: block;
 }
 
 ul#screenshots {
-  padding-top: 10px;
-  width: auto;
-}
-
-ul#screenshots li a img {
-  height: 70px;
-  border: none;
-}
-
-ul#screenshots li a {
-  border: none;
-  margin: 0;
-  padding: 0;
+  margin: 5px 0;
 }
 
 ul#screenshots li {
-  float: left;
-  padding: 0;
-  margin-right: 5px;
+  width: 160px;
+  margin: 0px;
+  text-align: center;
 }
 
+ul#screenshots li img {
+  width: 150px;
+  border: 0px;
+}
 
 /* *********************************************************** */
 /* DETAIL */
