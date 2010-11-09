@@ -32,7 +32,7 @@ ul {
 }
 
 .wrap {
-  width: 1200px;
+  width: 1280px;
   margin: 0 auto;
 }
  
@@ -133,7 +133,7 @@ button:hover, .button:hover, .button.active,
 /* *********************************************************** */
 
 #videocol {
-  width: 700px;
+  width: 780px;
   position: absolute;
   margin-left: 250px;
   padding-top: 30px;
@@ -144,13 +144,13 @@ button:hover, .button:hover, .button.active,
   -moz-box-shadow: 0px 0px 10px #000;
   -webkit-box-shadow: 0px 0px 10px #000;
   box-shadow: 0px 0px 10px #000;
-  width: 700px ;
+  width: 780px ;
   height: auto;
   background: #fff;
 }
 
 #preview_video {
-  height: 400px;
+  height: 445px;
   background: #000;
 }
 

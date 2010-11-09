@@ -2,7 +2,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Lighspeed [SS]: OR Video Portal</title>
-    <%= stylesheet_link_tag :all %>
+		<%= stylesheet_link_tag 'jquery-ui', 'jquery.checkbox', 'jquery.safari-checkbox', 'main', 'message_block' %>
+    <%= stylesheet_link_tag 'ipad' if session[:ipad] %>
     <%= javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery.checkbox.min', 'rails', 'message_block', 'application' %>
     <%= csrf_meta_tag %>
   </head>

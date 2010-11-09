@@ -12,6 +12,7 @@ role :db,  server, :primary => true # This is where Rails migrations will run
 set :user, 'root'
 set :password, 'vfurnace'
 set :deploy_to, "/opt/medical"
+set :deploy_via, :copy
 default_run_options[:pty] = true
 
 namespace :deploy do
@@ -25,6 +26,7 @@ namespace :deploy do
   task :medical, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
     run <<-CMD
       ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml &&
+      ln -nfs #{shared_path}/snapshots #{release_path}/public/snapshots &&
       chown -R apache.apache #{release_path}
     CMD
   end
