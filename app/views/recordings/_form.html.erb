@@ -19,35 +19,7 @@
       <div class="clear"></div>
     </div>
   <% end %>
-  <% if @recording.recording? %>
-    <div class="controlblock">
-      <h3>Hot Marks</h3>
-      <div id="customhot">
-        <div class="fields">
-          <%= form_tag hotmarks_path, :remote => true do %>
-            <%= hidden_field_tag 'type', 'hotmark' %>
-            <%= hidden_field_tag 'link', @recording.links[:self] %>
-            <div class="field">
-              <label for="customhot">Custom Meta Data</label>
-              <%= text_field_tag 'hotmark' %>
-            </div>
-            <button type="submit"><span>Add</span></button>
-          <% end %>
-          <div id="bookmark">
-            <%= link_to(hotmarks_path(:type => 'bookmark', :link => @recording.links[:self]), :remote => true, :method => :post, :class => "button withimage") do %>
-              <span>Bookmark</span>
-            <% end %>  
-          </div>
-        </div>
-      </div>
-      <% ['Open', 'Close', 'Proc 1', 'Proc 2', 'Proc A', 'Proc B'].each do |hotmark| %>
-        <%= link_to(hotmarks_path(:type => 'hotmark', :hotmark => hotmark, :link => @recording.links[:self]), :remote => true, :method => :post, :class => "squarebutton") do %>
-          <span><%= hotmark %></span>
-        <% end %>
-      <% end %>
-      <div class="clear"></div>
-    </div>
-  <% end %>
+  
   
   <div class="controlblock">
     <h3>Camera Controls</h3>
@@ -78,4 +50,37 @@
       <% end %>
     </ul>
   </div>
+</div>
+
+
+<div id="right">
+  <% if @recording.recording? %>
+    <div class="controlblock">
+      <h3>Hot Marks</h3>
+      <div id="customhot">
+        <div class="fields">
+          <%= form_tag hotmarks_path, :remote => true do %>
+            <%= hidden_field_tag 'type', 'hotmark' %>
+            <%= hidden_field_tag 'link', @recording.links[:self] %>
+            <div class="field">
+              <label for="customhot">Custom Meta Data</label>
+              <%= text_field_tag 'hotmark' %>
+            </div>
+            <button type="submit"><span>Add</span></button>
+          <% end %>
+          <div id="bookmark">
+            <%= link_to(hotmarks_path(:type => 'bookmark', :link => @recording.links[:self]), :remote => true, :method => :post, :class => "button withimage") do %>
+              <span>Bookmark</span>
+            <% end %>  
+          </div>
+        </div>
+      </div>
+      <% ['Open', 'Close', 'Proc 1', 'Proc 2', 'Proc A', 'Proc B'].each do |hotmark| %>
+        <%= link_to(hotmarks_path(:type => 'hotmark', :hotmark => hotmark, :link => @recording.links[:self]), :remote => true, :method => :post, :class => "squarebutton") do %>
+          <span><%= hotmark %></span>
+        <% end %>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
 </div>

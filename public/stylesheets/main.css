@@ -396,9 +396,9 @@ ul#screenshots li img {
 /* DETAIL */
 /* *********************************************************** */
 
-#detail #left {
+/* #detail #left {
   width: 470px;
-}
+} 
 
 #detail #videocol {
   float: right;
@@ -406,8 +406,16 @@ ul#screenshots li img {
   margin-left: 0;
 }
 
+
+
 #detail .controlblock {
   width: auto;
+}
+
+*/
+
+#detail .field input[type="text"] {
+  width: 185px;
 }
 
 .controlblock .fields {
@@ -453,6 +461,7 @@ ul#screenshots li img {
 #customhot {
   width: 250px;
   float: left;
+  margin-bottom: 8px;
 }
 
 #customhot .field input {
