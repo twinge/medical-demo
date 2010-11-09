@@ -1,10 +1,3 @@
-<script type="text/javascript" charset="utf-8">
-	var x, y
-  $(function() {
-    x = $('#preview_video').offset().left + 45;
-    y = $('#preview_video').offset().top - 4;
-	});
-</script>
 <div id="left">
   <div class="controlblock">
     <h3>Local Video Sources</h3>
@@ -18,7 +11,7 @@
     <h3>Multiview Enable</h3>
     <%= form_tag('/multiview', :method => :get) do %>
       <div class="checkfield"><%= check_box_tag :m_endo, '100', params[:m_endo] %><label for="m_endo">Endo Cam</label></div>
-      <div class="checkfield"><%= check_box_tag :m_room, '101', params[:m_room] %><label for="m_room">Room Cam</label></div>
+      <div class="checkfield"><%= check_box_tag :m_room, '102', params[:m_room] %><label for="m_room">Room Cam</label></div>
       <div class="checkfield disabled"><input type="checkbox" name="m_quad" id="m_quad" disabled="disabled"><label for="m_quad">Quad HD</label></div>
       <div class="checkfield disabled"><input type="checkbox" name="m_3d" id="m_3d" disabled="disabled"><label for="m_3d">3D Images</label></div>
       
@@ -52,7 +45,7 @@
   <div id="preview_controls">
     <ul>
       <% if @channel.id %>
-        <li id="record"><%= link_to(new_recording_path(:channel_id => @channel.id + 2), :class => "button withimage" ) do %><span>Record</span><% end %></li>
+        <li id="record"><%= link_to(new_recording_path(:channel_id => @channel.id), :class => "button withimage" ) do %><span>Record</span><% end %></li>
         <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage") do %><span>Take Snapshot</span><% end %></li>
         <!-- <li id="savesnapshot" class="disabled"><a href="" class="button withimage"><span>Save Snapshot</span></a></li> -->
       <% end %>
@@ -72,10 +65,12 @@
 
 <div id="right">
   <div class="controlblock">
-    <h3>Remote Destinations</h3>
-    <a href="" class="squarebutton remote disabled"><span>Recorder</span></a>
-		<%= link_to(decoder_path(Decoder.first.id, :channel_id => @channel.id), :class => "squarebutton remote", :remote => true) do %>
-    	<span>Preview Room</span>
+    <h3>Destinations</h3>
+		<%= link_to(decoder_path(Decoder.first.id, :channel_id => @channel.id, :destination => 'Local Display'), :class => "squarebutton remote", :remote => true) do %>
+    	<span>Local Display</span>
+		<% end %>
+		<%= link_to(decoder_path(Decoder.first.id, :channel_id => @channel.id, :destination => 'Local Display'), :class => "squarebutton remote", :remote => true) do %>
+    	<span>Conference</span>
 		<% end %>
     <div class="clear"></div>
   </div>
@@ -109,10 +104,11 @@
 	    $(function() {
 				var channels = '';
 				<% @channels.each do |channel| %>
-					channels += ' <%= channel.callsign %>';
-				<% break; end %>
-				console.log('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vfmonitor" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s ' + channels + ' -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
-	      $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vfmonitor" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s ' + channels + ' -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
+					channels += '--monitor-callsign "<%= channel.callsign %>" ';
+				<% end %>
+				y += 20;
+				tag = '<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param name="CABBASE" value="VFAgent.cab"><param name="propertyURL" value="/vfagent.properties"><param name="application" value="vfmonitor"><param name="vfcla" value=\'--kill-me -l udp://10.1.50.51:4902 -dog -dc 1 -dr 1 --video-fullspeed all ' + channels + ' -dog -nc -gd -top -x ' + x + ' -y ' + y + ' -h 435 -w 770 --monitor-no-status --monitor-no-vubars\'></applet>'
+	      $('body').append(tag)
 	    });
 	  </script>
 	<% end %>

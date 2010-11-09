@@ -3,8 +3,6 @@
 <% if @open_player && !session[:ipad] %>
   <script type="text/javascript" charset="utf-8">
     $(function() {
-      var x = $('#preview_video').offset().left + 72;
-      var y = $('#preview_video').offset().top - 5;
       $('body').append('<applet height="1" width="1" archive="VFAgent.jar" codebase="http://10.1.50.51/" code="com.videofurnace.player.VFAgent"><param value="/vfagent.properties" name="propertyURL"><param value="VFAgent.cab" name="CABBASE"><param value="/loading.shtml&unsupported=1" name="macclassic"><param value="vftv" name="application"><param name="vfcla" value="--kill-me -l udp://10.1.50.51:4902 -s <%= @channel.callsign %> -dog -nc -gd -top -x ' + x + ' -y ' + y + '"><br><b>You must enable Java in your browser settings</b><br></applet>')
     });
   </script>

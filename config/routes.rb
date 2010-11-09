@@ -13,6 +13,7 @@ Medical::Application.routes.draw do
     member do
       post :stop
       post :publish
+      get :review
     end
   end
 

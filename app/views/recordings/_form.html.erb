@@ -6,14 +6,14 @@
       <div class="fields">
         <div class="field">
           <label for="title">Title</label>
-          <%= text_field_tag 'title', @recording.title, :readonly => @recording.id.present? %>
+          <%= text_field_tag 'title', @recording.title %>
         </div>
         <div class="field">
           <label for="description">Description</label>
-          <%= text_field_tag 'description', @recording.description, :readonly => @recording.id.present? %>
+          <%= text_field_tag 'description', @recording.description %>
         </div>
         <% if @recording.recording? %>
-          <!-- <button type="button" id="save_clip"><span>Save Clip</span></button> -->
+          <button type="button" id="save_clip"><span>Save Clip</span></button><%= spinner('save', :color => 'gray') %>
         <% end %>
       </div>
       <div class="clear"></div>
@@ -46,6 +46,9 @@
       <% elsif @recording.recording? %>
         <li id="stop"><%= link_to(stop_recording_path(@recording.id), :class => 'button withimage', :method => :post) do %><span>Stop</span><% end %></li>
       <% else %>
+        <% unless @review_url %>
+          <li id="publish"><%= link_to(review_recording_path(@recording.id), :class => 'button', :method => :post) do %><span>Review</span><% end %></li>
+        <% end %>
         <li id="publish"><%= link_to(publish_recording_path(@recording.id), :class => 'button', :method => :post) do %><span>Publish</span><% end %></li>
       <% end %>
     </ul>

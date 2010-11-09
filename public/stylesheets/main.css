@@ -34,7 +34,7 @@ ul {
 
 .wrap {
   width: 1280px;
-  margin: 0 auto;
+  margin: 0 0 0 20px;
 }
  
 .button, button {
@@ -97,6 +97,7 @@ button:hover, .button:hover, .button.active,
 .headwrap {
   background: #000;
   height: 80px;
+	padding-top: 0px;
 }
 
 #logo {
@@ -531,4 +532,8 @@ span.subtitle {
 
 li.snapshot {
 	cursor: pointer;;
+}
+
+#screenshots li {
+	float: left;
 }

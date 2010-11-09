@@ -15,8 +15,7 @@ class SnapshotsController < ApplicationController
     @snapshot.destroy
 
     respond_to do |format|
-      format.html { redirect_to(snapshots_url) }
-      format.xml  { head :ok }
+      format.js 
     end
   end
   

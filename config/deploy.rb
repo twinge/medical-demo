@@ -1,4 +1,6 @@
 require "bundler/capistrano"
+
+set :deploy_via, :copy
 set :application, "medical"
 set :repository,  "git@git.26am.com:medical.git"
 
@@ -12,7 +14,6 @@ role :db,  server, :primary => true # This is where Rails migrations will run
 set :user, 'root'
 set :password, 'vfurnace'
 set :deploy_to, "/opt/medical"
-set :deploy_via, :copy
 default_run_options[:pty] = true
 
 namespace :deploy do

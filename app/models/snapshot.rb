@@ -4,7 +4,7 @@ class Snapshot < ActiveRecord::Base
   end
   
   def full_path
-    Rails.root.join('snapshots', filename).to_s
+    Rails.root.join(Snapshot.base_path, filename).to_s
   end
   
   def self.base_path

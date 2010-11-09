@@ -1,6 +1,11 @@
 $(function() {
+	$('.squarebutton').click(function() {
+		$(this).removeClass('on');
+		$(this).addClass('on');
+	});
 	$('#save_clip').click(function() {
 		var form = $(this).closest('form');
+		$('#spinner_save').show();
   	$.ajax({
        url: form.attr('action'),
        data: form.serializeArray(),
@@ -32,9 +37,9 @@ $(function() {
 		$(this).addClass('on');
 		return false
 	});
-  $('#screenshots').bxSlider({
-    displaySlideQty: 8
-  });
+  // $('#screenshots').bxSlider({
+  //   displaySlideQty: 8
+  // });
    $('#footertab').click(function() {
      $(this).toggleClass("close");
    }); 

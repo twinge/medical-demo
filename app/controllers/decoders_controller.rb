@@ -3,7 +3,7 @@ class DecodersController < ApplicationController
   def show
     @decoder = Decoder.find(params[:id])
     @channel = Channel.find(params[:channel_id])
-    @message = "Now streaming #{@channel.title} to #{@decoder.title}"
+    @message = "Now streaming #{@channel.title} to #{params[:destination]}"
     Net::SSH.start( @decoder.address, 'admin', :password => 'manager' ) do|ssh|
       start_id = @channel.id
       stop_id = start_id == 1 ? 2 : 1
