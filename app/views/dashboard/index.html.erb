@@ -73,7 +73,7 @@
 <div id="right">
   <div class="controlblock">
     <h3>Remote Destinations</h3>
-    <a href="" class="squarebutton remote disabled" style="height:78px"><span>Recorder</span></a>
+    <a href="" class="squarebutton remote disabled"><span>Recorder</span></a>
 		<%= link_to(decoder_path(Decoder.first.id, :channel_id => @channel.id), :class => "squarebutton remote", :remote => true) do %>
     	<span>Preview Room</span>
 		<% end %>

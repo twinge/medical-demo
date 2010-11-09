@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     def open_channel(channel)
       if (session[:active_channel] != channel || params[:force] == 'true') && !session[:ipad]
         @open_player = true
-        close_players(:except => channel) 
+        # close_players(:except => channel) 
       end
     end
     def close_players(options = {})
@@ -18,11 +18,11 @@ class ApplicationController < ActionController::Base
             # Haivision::Cli.close_instream_by_channel(session[:active_channel]) 
           end
         elsif options[:only]
-          Haivision::Cli.close_instream_by_channel(options[:only]) 
+          # Haivision::Cli.close_instream_by_channel(options[:only]) 
         else
           [100, 101, 102, 103].each do |channel|
             unless channel == options[:except]
-              Haivision::Cli.close_instream_by_channel(channel) 
+              # Haivision::Cli.close_instream_by_channel(channel) 
               logger.debug("closing channel: #{channel}")
             end
           end
