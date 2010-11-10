@@ -34,7 +34,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
-    haivision (0.2.0)
+    haivision (0.2.1)
       eventmachine
       json
       net-scp
