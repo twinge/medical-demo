@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+  <error>
+    <code>1011</code>
+    <message>Input XML data is poorly formatted</message>
+  </error>
+</response>

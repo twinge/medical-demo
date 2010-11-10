@@ -1,0 +1,135 @@
+#!/usr/bin/env ruby
+
+STDOUT.sync = true
+
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'rubygems'
+require 'optparse'
+require 'drb'
+require 'yaml'
+require 'restclient'
+# require 'haivision'
+
+begin
+  # Save ARGV in case someone wants to use it later
+  ORIGINAL_ARGV = ARGV.dup
+
+  options = {:daemonize => false, :port => 3010, :syslog => true, :events => true, :test => false, :address => '127.0.0.1'}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = <<-EOF
+  Usage:
+    Starting:
+      apiserver [-c <config file>] [-p <port> | -b] [-P <file>] [-l <file>] [-D] [-a <address>] --url http://api.haivision.fake/apis
+      
+    Querying:
+      apiserver -v
+      
+  EOF
+  
+    opts.on("-C CONFIG", "--config-file CONFIG", "Configuration file") do |x|
+      options[:config] = x
+    end
+    
+    opts.on("-p PORT", "--port PORT", "Communications port (default 3010)") do |x|
+      options[:port] = x
+    end
+    
+    opts.on("-a ADDRESS", "--ADDRESS PORT", "IP address to bind to (default 127.0.0.1)") do |x|
+      options[:address] = x
+    end
+    
+    opts.on("--url URL", "Fully quilified target URL for API") do |x|
+      options[:url] = x
+    end
+    
+    opts.on("-t", "--test", "Run the server in \"Test\" mode where it returns dummy data.") do |x|
+      options[:test] = true
+    end
+    
+    
+    opts.on("-PFILE", "--pid FILE", "Where to write the PID file") do |x|
+      options[:pid] = x
+    end
+    
+    opts.on("-lFILE", "--log FILE", "Where to write the log file") do |x|
+      options[:log] = x
+    end
+    
+    opts.on("-D", "--daemonize", "Daemonize") do
+      options[:daemonize] = true
+    end
+    
+    opts.on("-v", "--version", "Print the version number and exit") do
+      options[:version] = true
+    end
+    
+    opts.on("-V", "Print extended version and build information") do
+      options[:info] = true
+    end
+    
+    opts.on("--log-level LEVEL", "Log level [debug|info|warn|error|fatal]") do |x|
+      options[:log_level] = x.to_sym
+    end
+    
+    opts.on("--no-syslog", "Disable output to syslog") do
+      options[:syslog] = false
+    end
+    
+  end
+  
+  opts.parse!
+  
+  # validate
+  if options[:log_level] && ![:debug, :info, :warn, :error, :fatal].include?(options[:log_level])
+    abort("Invalid log level '#{options[:log_level]}'")
+  end
+  
+  if !options[:url] && !options[:test]
+    abort("Your must provide a url target for the API calls")
+  end
+  
+  if options[:url] && !options[:test]
+    # try to connect to the api endpoint to make sure it's valid
+    begin
+      client = RestClient::Resource.new options[:url] + '/recorders', :open_timeout => 2
+      begin
+        response = client.get
+      rescue RestClient::Forbidden => e
+        puts "API functions not enabled."
+      end
+      unless response.code == 200
+        puts response.body
+      end
+    rescue => e
+      puts e.message
+      puts "Invalid API url. Please check it and try again."
+    end
+  end
+  
+  # dispatch
+  if !options[:config] && options[:version]
+    require 'apiserver'
+    Apiserver::CLI::Version.version
+  elsif !options[:config] && options[:info]
+    require 'apiserver'
+    Apiserver::EventHandler.load
+    Apiserver::CLI::Version.version_extended
+  elsif !options[:config] && command = ARGV[0]
+    require 'apiserver'
+    Apiserver::EventHandler.load
+    Apiserver::CLI::Command.new(command, options, ARGV)
+  else
+    require 'apiserver/cli/run'
+    Apiserver::CLI::Run.new(options)
+  end
+rescue Exception => e
+  if e.instance_of?(SystemExit)
+    raise
+  else
+    puts 'Uncaught exception'
+    puts e.message
+    puts e.backtrace.join("\n")
+  end
+end

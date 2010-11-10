@@ -1,0 +1,14 @@
+source :gemcutter
+
+gem 'rest-client'
+gem 'eventmachine'
+gem 'nokogiri'
+gem 'net-ssh'
+gem 'net-scp'
+
+group :development do
+  gem 'mocha'
+  gem 'shoulda'
+  gem 'echoe'
+  gem 'jeweler'
+end

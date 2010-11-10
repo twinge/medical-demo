@@ -1,0 +1,41 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    echoe (4.3.1)
+      gemcutter
+      rubyforge
+    eventmachine (0.12.10)
+    gemcutter (0.6.1)
+    git (1.2.5)
+    jeweler (1.4.0)
+      gemcutter (>= 0.1.0)
+      git (>= 1.2.5)
+      rubyforge (>= 2.0.0)
+    json_pure (1.4.3)
+    mime-types (1.16)
+    mocha (0.9.8)
+      rake
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.0.23)
+    nokogiri (1.4.3.1)
+    rake (0.8.7)
+    rest-client (1.6.0)
+      mime-types (>= 1.16)
+    rubyforge (2.0.4)
+      json_pure (>= 1.1.7)
+    shoulda (2.11.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  echoe
+  eventmachine
+  jeweler
+  mocha
+  net-scp
+  net-ssh
+  nokogiri
+  rest-client
+  shoulda

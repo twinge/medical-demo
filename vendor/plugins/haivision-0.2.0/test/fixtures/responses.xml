@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+  <recordings>
+    <recording>
+      <id>99fe1d68-9ed6-4813-883b-1044f77a6b63</id>
+      <sourceUrl>udp://239.19.3.100:4900/;raw=1</sourceUrl>
+      <state>RECORDED</state>
+      <duration>3</duration>
+      <maxDuration>654</maxDuration>
+      <progress>0.00</progress>
+      <metadata>
+        <title>The Goonies</title>
+        <description>A group of kids embark on a wild adventure after finding a pirate treasure map.</description>
+      </metadata>
+      <link rel="self" type="application/xml" href="http://1.2.3.4/apis/recorders/recorder-003018aafe23-4909-0/recordings/recording-99fe1d68-9ed6-4813-883b-1044f77a6b63"/>
+      <link rel="recorder" type="application/xml" href="http://1.2.3.4/apis/recorders/recorder-003018aafe23-4909-0"/>
+      <link rel="hotmarks" type="application/xml" href="http://1.2.3.4/apis/recorders/recorder-003018aafe23-4909-0/recordings/recording-99fe1d68-9ed6-4813-883b-1044f77a6b63/hotmarks"/>
+      <link rel="publishes" type="application/xml" href="http://1.2.3.4/apis/recorders/recorder-003018aafe23-4909-0/recordings/recording-99fe1d68-9ed6-4813-883b-1044f77a6b63/publishes"/>
+      <link rel="reviews" type="application/xml" href="http://1.2.3.4/apis/recorders/recorder-003018aafe23-4909-0/recordings/recording-99fe1d68-9ed6-4813-883b-1044f77a6b63/reviews"/>
+    </recording>
+  </recordings>
+</response>
