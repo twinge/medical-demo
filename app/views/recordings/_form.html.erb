@@ -41,10 +41,10 @@
     <ul>
       <% if params[:action] == 'new' %>
         <li id="record"><%= link_to('#', :class => 'button withimage') do %><span>Record</span><% end %></li>
-        <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage") do %><span>Take Snapshot</span><% end %></li>
+        <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage", :id => 'snapshot_link') do %><span>Take Snapshot</span><% end %><%= spinner('snapshot', :color => 'gray') %></li>
       <% elsif @recording.recording? %>
         <li id="stop"><%= link_to(stop_recording_path(@recording.id), :class => 'button withimage', :method => :post) do %><span>Stop</span><% end %></li>
-        <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage") do %><span>Take Snapshot</span><% end %></li>
+        <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage", :id => 'snapshot_link') do %><span>Take Snapshot</span><% end %><%= spinner('snapshot', :color => 'gray') %></li>
       <% else %>
         <% unless @review_url %>
           <li id="publish"><%= link_to(review_recording_path(@recording.id), :class => 'button') do %><span>Review</span><% end %></li>

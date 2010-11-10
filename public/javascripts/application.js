@@ -1,4 +1,7 @@
 $(function() {
+	$('#snapshot_link').click(function() {
+		$('#spinner_snapshot').show();
+	});
 	$('.squarebutton').click(function() {
 		$(this).removeClass('on');
 		$(this).addClass('on');

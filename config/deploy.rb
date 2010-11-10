@@ -27,7 +27,7 @@ namespace :deploy do
   task :medical, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
     run <<-CMD
       ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml &&
-      ln -nfs #{shared_path}/snapshots #{release_path}/public/snapshots &&
+      ln -nfs #{shared_path}/snaps #{release_path}/public/snaps &&
       chown -R apache.apache #{release_path}
     CMD
   end

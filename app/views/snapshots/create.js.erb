@@ -1,3 +1,4 @@
 $('#shots').show();
 $('#screenshots').append('<%= escape_javascript(render('snapshot', :snapshot => @snapshot)) %>');
 $('<%= dom_id(@snapshot) %>').effect('highlight');
+$('#spinner_snapshot').hide();

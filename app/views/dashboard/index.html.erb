@@ -46,7 +46,7 @@
     <ul>
       <% if @channel.id %>
         <li id="record"><%= link_to(new_recording_path(:channel_id => @channel.id), :class => "button withimage" ) do %><span>Record</span><% end %></li>
-        <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage") do %><span>Take Snapshot</span><% end %></li>
+        <li id="snapshot"><%= link_to(snapshots_path(:channel_id => @channel.id), :method => :post, :remote => true, :class => "button withimage", :id => 'snapshot_link') do %><span>Take Snapshot</span><% end %><%= spinner('snapshot', :color => 'gray') %></li>
         <!-- <li id="savesnapshot" class="disabled"><a href="" class="button withimage"><span>Save Snapshot</span></a></li> -->
       <% end %>
     </ul>
