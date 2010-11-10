@@ -35,6 +35,7 @@ class RecordingsController < ApplicationController
   end
   
   def publish
+    Review.all.map(&:stop)
     @recording.publish!
     flash[:confirm] = "Recording has been published"
     redirect_to '/dashboard'

@@ -1,6 +1,6 @@
 class Snapshot < ActiveRecord::Base
   def url
-    '/snapshots/' + filename
+    '/snaps/' + filename
   end
   
   def full_path
@@ -8,7 +8,7 @@ class Snapshot < ActiveRecord::Base
   end
   
   def self.base_path
-    Rails.root.join('public','snapshots').to_s
+    Rails.root.join('public','snaps').to_s
   end
 end
 
