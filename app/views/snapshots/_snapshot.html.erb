@@ -1,0 +1,4 @@
+<li class="snapshot" id="<%= dom_id(snapshot) %>">
+	<%= link_to(image_tag(snapshot.url), snapshot_path(snapshot)) %>
+	<%= link_to('x', snapshot_path(snapshot), :method => :delete, :remote => true, :class => 'delete', :confirm => "are you sure you want to delete this snapshot?") %>
+</li>
