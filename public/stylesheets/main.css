@@ -537,3 +537,8 @@ li.snapshot {
 #screenshots li {
 	float: left;
 }
+
+#preview_video {height: 430px;}
+#preview_window {width: 701px;}
+#videocol {width: 701px;}
+#right {width:280px;}
